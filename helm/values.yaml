@@ -1,0 +1,23 @@
+
+ingress:
+  enabled: false
+
+api:
+  replicaCount: 1
+  image:
+    repository: demo2
+    tag: latest
+    pullPolicy: Never
+  service:
+    portName: http
+    type: NodePort
+    externalPort: 8080
+    internalPort: 8080
+    nodePort: 30080
+
+mysql:
+  mysqlUser: demo2
+  mysqlPassword: demo2
+  mysqlDatabase: demo2
+  persistence:
+    enabled: false

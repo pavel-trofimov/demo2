@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<Family id="0" />
+	<Child id="0" first_name="firstName0" second_name="secondName0" sex="MALE" pesel="000" birth_date="2008-03-05" family_id="0" />
+	<Child id="1" first_name="firstName1" second_name="secondName1" sex="MALE" pesel="001" birth_date="2008-03-05" family_id="0" />
+	<Family id="1" />
+	<Child id="2" first_name="firstName2" second_name="secondName2" sex="FEMALE" pesel="002" birth_date="2010-05-09" family_id="1" />
+	<Child id="3" first_name="firstName3" second_name="secondName3" sex="MALE" pesel="003" birth_date="2012-04-04" family_id="1" />
+	<Child id="4" first_name="firstName4" second_name="secondName4" sex="FEMALE" pesel="004" birth_date="2013-10-10" family_id="1" />
+</dataset>

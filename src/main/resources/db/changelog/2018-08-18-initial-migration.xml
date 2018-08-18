@@ -1,0 +1,62 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="Pavel Trofimov (generated)" id="1534584188613-1">
+        <createTable tableName="child">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="childPK"/>
+            </column>
+            <column name="birth_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pesel" type="VARCHAR(255)"/>
+            <column name="second_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sex" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="family_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Pavel Trofimov (generated)" id="1534584188613-2">
+        <createTable tableName="family">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="familyPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Pavel Trofimov (generated)" id="1534584188613-3">
+        <createTable tableName="father">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="fatherPK"/>
+            </column>
+            <column name="birth_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pesel" type="VARCHAR(255)"/>
+            <column name="second_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="family_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Pavel Trofimov (generated)" id="1534584188613-4">
+        <addUniqueConstraint columnNames="family_id" constraintName="UK_rtg14g6iktsdapxqu2otypcm9" tableName="father"/>
+    </changeSet>
+    <changeSet author="Pavel Trofimov (generated)" id="1534584188613-5">
+        <addForeignKeyConstraint baseColumnNames="family_id" baseTableName="father" constraintName="FK9wsh8dwpsy38hpdxkly22pu96" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="family" validate="true"/>
+    </changeSet>
+    <changeSet author="Pavel Trofimov (generated)" id="1534584188613-6">
+        <addForeignKeyConstraint baseColumnNames="family_id" baseTableName="child" constraintName="FKhj2xmiglh5fr64tvotyhjb61p" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="family" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
