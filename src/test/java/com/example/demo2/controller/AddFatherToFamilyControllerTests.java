@@ -70,7 +70,31 @@ public class AddFatherToFamilyControllerTests {
 
         Father persistentFather = fatherRepository.findOne(Integer.parseInt(fatherId.toString()));
         Assert.assertNotNull(persistentFather);
+
+        fatherRepository.deleteAll();
 	}
+
+	@Test
+    public void ifFamilyAlreadyHasFatherReturn422HttpStatus() {
+        Family family = familyRepository.findOne(0);
+        Father father = createFather(family);
+
+        ResponseEntity<LinkedHashMap> responseEntity = restTemplate.postForEntity(
+                "http://localhost:" + port + "/addFatherToFamily",
+                father,
+                LinkedHashMap.class);
+
+        Assert.assertEquals(200, responseEntity.getStatusCodeValue());
+
+        responseEntity = restTemplate.postForEntity(
+                "http://localhost:" + port + "/addFatherToFamily",
+                father,
+                LinkedHashMap.class);
+
+        Assert.assertEquals(422, responseEntity.getStatusCodeValue());
+
+        fatherRepository.deleteAll();
+    }
 
     private Father createFather(Family family) {
 

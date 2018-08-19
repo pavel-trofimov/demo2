@@ -8,6 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 
 @Service
 public class AddFatherToFamilyService {
@@ -31,5 +33,25 @@ public class AddFatherToFamilyService {
         Family family = father.getFamily();
         return projectionFactory
                 .createProjection(FamilyProjection.class, family);
+    }
+
+    public void checkFather(
+            @NotNull Father father,
+            @NotNull BindingResult bindingResult) throws BindException {
+
+        Family family = father.getFamily();
+        if(family != null) {
+            Father persistentFather = fatherRepository.findByFamily(family);
+            if (persistentFather != null) {
+                bindingResult.rejectValue(
+                        "family",
+                        "UniqueConstraintError",
+                        "This family already has a father." );
+            }
+        }
+
+        if ( bindingResult.hasErrors() ) {
+            throw new BindException(bindingResult);
+        }
     }
 }
